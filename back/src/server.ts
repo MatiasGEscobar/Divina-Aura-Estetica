@@ -3,7 +3,7 @@ import router from "./routes/indexRoutes";
 
 const server = express();
 
-
+//MIDDLEWARES DE EXPRESS
 server.use(express.json());
 server.use(router);
 

@@ -1,17 +1,30 @@
 import { Request, Response } from "express";
+import { getTurnsService, getTurnByIdService, createTurnService, cancelTurnService } from "../services/turnsService";
 
 export const getAppointmentsController = async (req: Request, res: Response) => {
-    res.send("Obtener el listado de todos los turnos de todos los usuarios");
+    const turns = await getTurnsService();
+    res.status(200).json(turns);
 };
 
 export const getappointmentByIdController = async (req: Request, res: Response) => {
-    res.send("Obtener el detalle de un turno específico");
+    const turn = await getTurnByIdService(req.body.id);
+    if(!turn) {
+        res.status(404).json({ message: "El turno no existe" });
+    } else {
+        res.status(200).json(turn);
+    }
 };
 
 export const createAppointmentController = async (req: Request, res: Response) => {
-    res.send("Agendar un nuevo turno");
+    const turn = await createTurnService(req.body);
+    res.status(201).json(turn);
 };
 
 export const cancelAppointmentController = async (req: Request, res: Response) => {
-    res.send("Cambiar el estatus de un turno a “cancelled”");
+    const turn = await cancelTurnService(req.body.id);
+    if(!turn) {
+        res.status(404).json({ message: "El turno no existe" });
+    } else {
+        res.status(200).json(turn);
+    }
 };
