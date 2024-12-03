@@ -1,25 +1,18 @@
 import { Request, Response, NextFunction } from "express";
-import users from "../services/userService";
+import userRepository from "../repository/userRepository";
 
 
-const verifyUserExists = (req: Request, res: Response, next: NextFunction): any => {
-    const { name, email, birthDate, nDni, password } = req.body;
+const verifyUserExists = async (req: Request, res: Response, next: NextFunction): Promise<void | any> => {
+    const { name, email, birthDate, nDni, username, password } = req.body;
 
 
-    if (!name || !email || !birthDate || !nDni || !password) {
+    if (!name || !email || !birthDate || !nDni ||!username || !password) {
         res.status(400).json({ 
         message: "Faltan datos obligatorios. Por favor verifica el cuerpo de la solicitud."
         });
     }
 
-    const userExists = users.some(
-        (user) =>
-            user.name === name ||
-            user.email === email ||
-            user.birthDate === birthDate ||
-            user.nDni === nDni ||
-            user.UserCredentialId === password
-    );
+    const userExists = await userRepository.findOneBy({name, email, birthDate, nDni});
 
     if (userExists) {
         return res.status(400).json({

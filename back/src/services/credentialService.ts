@@ -1,33 +1,26 @@
 import CredentialDto from "../dtos/CredentialDto";
-import ICredentials from "../interfaces/ICredentials";
+import { Credential } from "../entities/Credential";
+import credentialRepository from "../repository/credentialRepository";
 
-const credentials: ICredentials[] = [];
-let id = 0;
 
-export const createCredentialService = async (credentialData: CredentialDto):Promise<number> => {
-    const newCredential: ICredentials = {
-        id: id,
-        username: credentialData.name,
-        password: credentialData.password
-    };
-    credentials.push(newCredential);
-    id++;
-    return newCredential.id;
+export const createCredentialService = async (credentialData: CredentialDto): Promise<Credential> => {
+    const newCredential: Credential = await credentialRepository.create(credentialData);
+    await credentialRepository.save(newCredential);
+    return newCredential;
 };
 
-export const verifyUserAndPassword = async (username: string, password: string):Promise<number | null> => {
-    const credential = credentials.find((credential) => credential.username === username);
 
-    if(!credential) {
-        console.log("El nombre de usuario no existe.");
-        return null;
+export const verifyUserAndPassword = async (credentialDto: CredentialDto): Promise<Credential> => {
+    const {username, password} = credentialDto;
+    const foundCredential: Credential | null = await credentialRepository.findOneBy({username});
+    if(!foundCredential) {
+        throw Error("Usuario no existe");
+    }else if(foundCredential && foundCredential.password !== password) {
+        throw Error("Contraseña incorrecta");
+    }else {
+        return foundCredential;
     }
-
-    if(credential.password !== password) {
-        console.log("La contraseña no es correcta.");
-        return null;
-    }
-
-    return credential.id;
 };
+
+
 

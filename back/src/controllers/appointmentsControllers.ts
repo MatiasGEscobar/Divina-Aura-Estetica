@@ -1,30 +1,49 @@
 import { Request, Response } from "express";
-import { getTurnsService, getTurnByIdService, createTurnService, cancelTurnService } from "../services/turnsService";
+import { getAppointmentsService, getAppointmentByIdService, createAppointmentService, cancelAppointmentService } from "../services/appointmentService";
 
-export const getAppointmentsController = async (req: Request, res: Response) => {
-    const turns = await getTurnsService();
-    res.status(200).json(turns);
+export const getAppointmentsController = async (req: Request, res: Response) => { 
+    try {
+    const appointments = await getAppointmentsService();
+    res.status(200).json(appointments);
+} catch (error: any) {
+    res.status(404).json({ error: error.message });
+}
 };
 
 export const getappointmentByIdController = async (req: Request, res: Response) => {
-    const turn = await getTurnByIdService(req.body.id);
+    try {
+    const turn = await getAppointmentByIdService(req.body.id);
     if(!turn) {
         res.status(404).json({ message: "El turno no existe" });
     } else {
         res.status(200).json(turn);
     }
+} catch (error) {
+    res.status(404).json({ message: "Error al obtener turno" });
+}
 };
 
-export const createAppointmentController = async (req: Request, res: Response) => {
-    const turn = await createTurnService(req.body);
-    res.status(201).json(turn);
+export const createAppointmentController = async (req: Request, res: Response): Promise<any> => {
+  const { date, time, description, status, userId } = req.body;
+    try {
+    const newAppointment = await createAppointmentService({
+        date, time, description, status, userId
+    });
+    return res.status(201).json(newAppointment);
+}   catch (error) {
+    res.status(400).json({ message: "Error al crear turno" });
+}
 };
 
 export const cancelAppointmentController = async (req: Request, res: Response) => {
-    const turn = await cancelTurnService(req.body.id);
-    if(!turn) {
+    try {
+    const appointmentId = await cancelAppointmentService(req.body.id);
+    if(!appointmentId) {
         res.status(404).json({ message: "El turno no existe" });
     } else {
-        res.status(200).json(turn);
+        res.status(200).json({ message: "Turno cancelado" });
     }
+} catch (error) {
+    res.status(404).json({ message: "Error al cancelar turno" });
+}
 };
