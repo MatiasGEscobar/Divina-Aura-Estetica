@@ -1,12 +1,15 @@
-import { useState } from 'react'
-import Home from './views/Home.jsx'
+import Home from './views/Home/Home.jsx'
+import NavBar from './components/NavBar/NavBar.jsx'
+import MisTurnos from './views/MisTurnos/MisTurnos.jsx'
 
 function App() {
 
 
   return (
     <>
+      <NavBar />
       <Home />
+      <MisTurnos /> 
     </>
   )
 }

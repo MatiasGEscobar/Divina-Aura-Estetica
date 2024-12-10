@@ -5,7 +5,7 @@ const EnterpriseLogo = () => {
    <a href="./index.html" style={{ textDecoration: "none", color: "inherit" }}>
     <EnterpriseLogoStylesDiv>
         <img height={50} src="https://static.thenounproject.com/png/6451249-84.png" alt="Logo Aura Divina" />
-        <h1>Aura Divina</h1>
+        <h1>Divina Aura</h1>
     </EnterpriseLogoStylesDiv>
    </a>
 
