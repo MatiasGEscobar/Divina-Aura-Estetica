@@ -34,8 +34,9 @@ export const createAppointmentService = async (appointmentData: AppointmentsDto)
 
             newAppointment.user = user;
             await queryRunner.manager.save(newAppointment);
-            await queryRunner.commitTransaction();
+        await queryRunner.commitTransaction();
         return newAppointment;
+
     } catch (err) {
         await queryRunner.rollbackTransaction();
         throw Error("Error al crear el turno");

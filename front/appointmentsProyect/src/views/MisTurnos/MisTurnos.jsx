@@ -1,10 +1,21 @@
-import AppointmentsPreCharge from "../../helpers/myAppointments";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Appointment from "../../components/Appointment/Appointment";
+import axios from "axios";
+
 
 const MisTurnos = () => {
 
-    const [appointments, setAppointments] = useState(AppointmentsPreCharge);
+    const [appointments, setAppointments] = useState([]);
+
+    useEffect(() => {
+      axios.get("http://localhost:3000/appointments")
+        .then((response) => {
+          setAppointments(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
 
   return (
     <>
