@@ -1,0 +1,36 @@
+h4{
+   display: flex;
+   border: 1px solid rgb(144, 19, 125);
+   border-radius: 3px;
+   align-items: center;
+   padding: 5px 70px;
+   margin: 20px 0px;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+   font-size: small;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaciado entre el círculo y el texto */
+}
+
+.circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status.active .circle {
+    background-color: green;
+}
+
+.status.cancelled .circle {
+    background-color: red;
+}

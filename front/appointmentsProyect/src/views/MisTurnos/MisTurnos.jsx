@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Appointment from "../../components/Appointment/Appointment";
 import axios from "axios";
+import { AppointmentsStylesDiv } from "./MisTurnos";
 
 
 const MisTurnos = () => {
@@ -17,18 +18,20 @@ const MisTurnos = () => {
         });
     }, []);
 
-  return (
-    <>
-      <h1>Sus Turnos</h1>
+
+    return (
+      <AppointmentsStylesDiv>
+      <h1>Turnos de:  {appointments.map ((appointment) => {return appointment.user.name})}</h1>
       {
-      appointments.length ? (
-        appointments.map((appointment) => {
+        appointments.length ? (
+          appointments.map((appointment) => {
             return ( <Appointment key={appointment.id} {...appointment} /> )
-        })
-      ) : ( <h1>No hay turnos</h1> )
-    }
-    </>
+          })
+        ) : ( <h3>No hay turnos</h3> )
+      }
+    </AppointmentsStylesDiv>
   );
+
 
 }
 

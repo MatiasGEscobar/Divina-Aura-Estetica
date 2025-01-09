@@ -3,7 +3,7 @@ interface AppointmentDto {
     time: Date;
     description: string;
     userId: number;
-    status: "active" | "cancelled";
+    status: "active 🟢" | "cancelled 🔴";
 }
 
 export default AppointmentDto;

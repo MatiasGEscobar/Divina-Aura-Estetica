@@ -5,6 +5,9 @@ export const EnterpriseLogoStylesDiv = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  background-color: #fff;
   background-color: transparent;
+
+  h1{
+  padding: 10px;
+  }
   `

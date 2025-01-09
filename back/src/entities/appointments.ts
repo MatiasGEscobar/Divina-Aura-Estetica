@@ -19,7 +19,7 @@ export class Appointment {
     description: string;
 
     @Column({
-        default: "active",
+    default: "active 🟢",
     })
     status: string;
 

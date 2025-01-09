@@ -1,13 +1,24 @@
-import { MenusStylesDiv } from "./Menus"
-import { MenuStylesDiv } from "./Menu"
+import { MenusStylesDiv } from "./Menus";
+import { MenuStylesDiv } from "./Menu";
+import { Link } from "react-router-dom";
+
 
 const Menus = () => {
   return (
     <MenusStylesDiv>
-      <MenuStylesDiv>Turnos WEB&nbsp;✄</MenuStylesDiv>
-      <MenuStylesDiv>Turnos WEB</MenuStylesDiv>
-      <MenuStylesDiv>Turnos WEB</MenuStylesDiv>
-      <MenuStylesDiv>Turnos WEB</MenuStylesDiv>
+      <Link to="/home" style={{ textDecoration: "none", color: "inherit" }}>
+      <MenuStylesDiv>Home 🏠</MenuStylesDiv>
+      </Link>
+      <Link style={{ textDecoration: "none", color: "inherit" }}>
+      <MenuStylesDiv>Sobre nosotros 💆🏻‍♀️</MenuStylesDiv>
+      </Link>
+      <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+      <MenuStylesDiv>Mis turnos 📆</MenuStylesDiv>
+      </Link>
+      <Link style={{ textDecoration: "none", color: "inherit" }}>
+      <MenuStylesDiv>Contacto 📱</MenuStylesDiv>
+      </Link>
+
     </MenusStylesDiv>
   )
 }

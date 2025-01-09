@@ -1,11 +1,16 @@
+import './Appointment.css'
+
 const Appointment = ({date, time, description, status}) => {
     return (
-        <>
-            <h3>{date}</h3>
-            <h3>{time}</h3>
-            <h3>{description}</h3>
-            <h3>{status}</h3>
-        </>
+        <div className = "container">
+            <h4>{date}</h4>
+            <h4>{time}</h4>
+            <h4>{description}</h4>
+            <h4 className={`status ${status.toLowerCase()}`}>
+                <span className="circle"></span>
+                {status}
+            </h4>
+        </div>
     )
 }
 
