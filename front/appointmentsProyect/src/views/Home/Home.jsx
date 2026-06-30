@@ -1,10 +1,17 @@
+import Hero from "../../components/Hero/Hero";
+import Services from "../../components/Services/Services";
+import Features from "../../components/Features/Features";
+import CTA from "../../components/CTA/CTA";
+
 const Home = () => {
   return (
     <>
-      <h1>Home</h1>
-      {/* footer */}
+      <Hero />
+      <Services />
+      <Features />
+      <CTA />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
